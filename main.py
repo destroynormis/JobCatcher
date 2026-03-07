@@ -59,9 +59,12 @@ router = Router()
 async def init_db():
     global db_pool
     try:
+        # Получаем строку подключения из переменной окружения
         database_url = os.getenv("DATABASE_URL")
+        
         if not database_url:
-            # Для локального запуска — используем ваши настройки
+            # Для локальной разработки — используем ваши настройки
+            print("⚠️ DATABASE_URL не найден — использую локальные настройки")
             db_pool = await asyncpg.create_pool(
                 user='postgres',
                 password='790731',
@@ -69,18 +72,20 @@ async def init_db():
                 host='127.0.0.1',
                 port=5432
             )
-            print("✅ База данных подключена (локально)!")
-            return db_pool
+        else:
+            # Для Render — используем DATABASE_URL
+            # Исправляем схему для asyncpg (postgresql → postgres)
+            if database_url.startswith("postgresql://"):
+                database_url = database_url.replace("postgresql://", "postgres://", 1)
+            
+            db_pool = await asyncpg.create_pool(database_url)
         
-        # Для Render — используем DATABASE_URL
-        if database_url.startswith("postgresql://"):
-            database_url = database_url.replace("postgresql://", "postgres://", 1)
-        
-        db_pool = await asyncpg.create_pool(database_url)
-        print("✅ База данных подключена (Render)!")
+        print("✅ База данных подключена!")
         return db_pool
     except Exception as e:
         print(f"❌ Ошибка подключения к БД: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 # ============ ШАГ 2: ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===========
