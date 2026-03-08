@@ -1,34 +1,16 @@
-# Секреты и токены
-.env
-*.env
-.env.local
-.env.*.local
-
-# Кэш Python
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-ENV/
 
-# Логи и временные файлы
-*.log
-*.tmp
-*.swp
+# Virtual env
+.venv/
+
+# Environment variables
+.env
 
 # IDE
 .idea/
 .vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-# ОС
+# OS
 .DS_Store
-Thumbs.db
