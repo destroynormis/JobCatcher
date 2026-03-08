@@ -1,4 +1,4 @@
-# JobCatcher
+# Job Catcher
 
 Telegram bot for catching IT vacancies from HH.ru with AI-powered profile analysis.
 
