@@ -1,21 +1,24 @@
 # Job Catcher
 
-Telegram bot for catching IT vacancies from HH.ru with AI-powered profile analysis.
+An asynchronous Telegram bot that automates the IT job hunt. Catch your next role before someone else does. Built with Python & Aiogram 3.
 
 ## About
 
-JobCatcher is an asynchronous Telegram bot built with aiogram 3 that collects your professional profile (using Yandex GPT) and automatically searches for relevant IT vacancies on HH.ru.
+JobCatcher collects your professional profile through a natural AI interview (powered by Yandex GPT) and automatically searches for relevant IT vacancies on HH.ru using the official API.
 
-The bot turns job hunting into a systematic pipeline: smart profile gathering → targeted search → clean vacancy cards.
+It turns chaotic job hunting into a clean, systematic pipeline: smart profile → targeted search with filters → clean vacancy cards.
 
 ## Features
 
-- Natural AI interview to build your profile (Yandex GPT)
-- Real-time vacancy search via official HH.ru API
-- Filtering by skills, experience, salary and location
-- Clean HTML-formatted vacancy output
+- Natural conversational AI profile builder (Yandex GPT)
+- Real-time HH.ru search with official API
+- Smart filters: skills, experience level, salary range, location
+- Pagination support
+- Clean HTML-formatted vacancy output with salary range
+- Editable profiles
+- Robust error handling (including "query is too old")
 - Modular architecture (routers + services + FSM)
-- Ready for background notifications and database integration
+- Ready for background notifications and deployment
 
 ## Quick Start
 
@@ -51,14 +54,22 @@ The bot turns job hunting into a systematic pipeline: smart profile gathering �
 
 ```
 bot/
-├── handlers/     # Telegram routers
+├── handlers/     # Telegram routers (vacancies, profile, start, etc.)
 ├── services/     # hh_service, ai_service
 ├── keyboards/
-├── models/       # FSM states
+├── models/       # FSM states (ProfileForm)
 ├── utils/
 ├── main.py
 └── config.py
 ```
+
+## Recent Improvements
+
+- Fixed vacancy text formatting and salary range display
+- Enhanced search logic with location constraints and pagination
+- Added HH.ru API integration + smart AI dialog flow
+- Fixed "query is too old" error
+- Prepared for Render deployment
 
 ## Roadmap
 
@@ -66,12 +77,8 @@ bot/
 - [ ] Persistent storage (PostgreSQL / SQLite + Redis)
 - [ ] AI-based vacancy relevance scoring
 - [ ] Additional sources (Habr Career, SuperJob)
-- [ ] Docker + docker-compose setup
+- [ ] Full Docker + docker-compose setup
 - [ ] Webhook deployment
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
